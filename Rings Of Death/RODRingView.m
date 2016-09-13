@@ -34,7 +34,7 @@
         _ring = ring;
         _windingNumber = 1;
         
-        _trackColor = [UIColor colorWithWhite:0.5 alpha:0.5];
+        _trackColor = [ring.bodyColor colorWithAlphaComponent:0.2];
         _shadowColor = [UIColor blackColor];
     
         _trackLayer = [[CAShapeLayer alloc] init];
