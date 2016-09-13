@@ -40,6 +40,15 @@
 
 @end
 
+@interface RODHeartRing : RODRing
+
+@property (nonatomic, assign, readonly) CGFloat inset;
+@property (nonatomic, assign, readonly) CGFloat lineWidth;
+
+- (instancetype)initWithInset:(CGFloat)inset lineWidth:(CGFloat)lineWidth;
+
+@end
+
 @interface RODSkullRing : RODRing
 
 @end

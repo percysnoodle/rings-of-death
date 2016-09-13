@@ -107,6 +107,53 @@
 
 @end
 
+@implementation RODHeartRing
+
+- (instancetype)initWithInset:(CGFloat)inset lineWidth:(CGFloat)lineWidth
+{
+    self = [super init];
+    if (self)
+    {
+        _inset = inset;
+        _lineWidth = lineWidth;
+    }
+    return self;
+}
+
+- (UIBezierPath *)bezierPathWithWindingNumber:(NSInteger)windingNumber
+{
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    
+    [bezierPath moveToPoint:CGPointMake(0.5, 0.5 - M_SQRT2/4 + self.inset * M_SQRT2)];
+    
+    for (int i = 0; i < windingNumber; i++)
+    {
+        [bezierPath addArcWithCenter:CGPointMake(0.5 + M_SQRT2/8, 0.5 - M_SQRT2/8)
+                              radius:0.25 - self.inset
+                          startAngle:5 * M_PI / 4
+                            endAngle:9 * M_PI / 4
+                           clockwise:YES];
+        
+        [bezierPath addLineToPoint:CGPointMake(0.5, 0.5 + M_SQRT2/4 - self.inset * M_SQRT2)];
+        
+        [bezierPath addArcWithCenter:CGPointMake(0.5 - M_SQRT2/8, 0.5 - M_SQRT2/8)
+                              radius:0.25 - self.inset
+                          startAngle:3 * M_PI / 4
+                            endAngle:7 * M_PI / 4
+                           clockwise:YES];
+        
+        [bezierPath addLineToPoint:CGPointMake(0.5, 0.5 - M_SQRT2/4 + self.inset * M_SQRT2)];
+    }
+    
+    bezierPath.lineWidth = self.lineWidth;
+    bezierPath.lineCapStyle = kCGLineCapRound;
+    bezierPath.lineJoinStyle = kCGLineJoinMiter;
+    
+    return bezierPath;
+}
+
+@end
+
 @implementation RODSkullRing
 
 - (UIBezierPath *)bezierPathWithWindingNumber:(NSInteger)windingNumber
