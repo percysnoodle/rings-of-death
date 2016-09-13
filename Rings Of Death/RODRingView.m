@@ -9,6 +9,8 @@
 #import "RODRingView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define kNumberOfgradientLayers 32
+
 @interface RODRingView ()
 
 @property (nonatomic, assign) NSInteger windingNumber;
@@ -18,6 +20,7 @@
 @property (nonatomic, strong, readonly) CAShapeLayer *shadowLayer;
 @property (nonatomic, strong, readonly) CAShapeLayer *shadowMaskLayer;
 @property (nonatomic, strong, readonly) CAShapeLayer *upperLayer;
+@property (nonatomic, strong, readonly) NSArray<CAShapeLayer *> *gradientLayers;
 
 @end
 
@@ -41,12 +44,12 @@
         
         _lowerLayer = [[CAShapeLayer alloc] init];
         _lowerLayer.fillColor = nil;
-        _lowerLayer.strokeColor = [ring.tintColor CGColor];
+        _lowerLayer.strokeColor = [ring.bodyColor CGColor];
         [self.layer addSublayer:_lowerLayer];
         
         _shadowLayer = [[CAShapeLayer alloc] init];
         _shadowLayer.fillColor = nil;
-        _shadowLayer.strokeColor = [ring.tintColor CGColor];
+        _shadowLayer.strokeColor = [ring.bodyColor CGColor];
         _shadowLayer.shadowOffset = CGSizeMake(0, 0);
         _shadowLayer.shadowOpacity = 0.5;
         _shadowLayer.shadowRadius = 10;
@@ -59,8 +62,23 @@
         
         _upperLayer = [[CAShapeLayer alloc] init];
         _upperLayer.fillColor = nil;
-        _upperLayer.strokeColor = [ring.tintColor CGColor];
+        _upperLayer.strokeColor = [ring.bodyColor CGColor];
         [self.layer addSublayer:_upperLayer];
+        
+        NSMutableArray *gradientLayers = [NSMutableArray array];
+        
+        for (int i = 0; i < kNumberOfgradientLayers; i++)
+        {
+            CAShapeLayer *gradientLayer = [[CAShapeLayer alloc] init];
+            gradientLayer.fillColor = nil;
+            gradientLayer.strokeColor = [ring.headColor CGColor];
+            gradientLayer.opacity = 1.0 / kNumberOfgradientLayers;
+            [self.layer addSublayer:gradientLayer];
+            
+            [gradientLayers addObject:gradientLayer];
+        }
+        
+        _gradientLayers = gradientLayers;
     }
     return self;
 }
@@ -111,7 +129,7 @@
     
     CGFloat progress = MAX(self.progress, 0.001);
     CGFloat shadowStart = progress - self.ring.shadowProportion;
-    CGFloat aboveShadowStart = progress - self.ring.aboveShadowProportion;
+    CGFloat upperStart = progress - 2 * self.ring.shadowProportion;
     
     self.trackLayer.frame = frame;
     self.trackLayer.lineCap = lineCap;
@@ -150,8 +168,24 @@
     self.upperLayer.lineJoin = lineJoin;
     self.upperLayer.lineWidth = lineWidth;
     self.upperLayer.path = scaledPath;
-    self.upperLayer.strokeStart = aboveShadowStart / self.windingNumber;
+    self.upperLayer.strokeStart = upperStart / self.windingNumber;
     self.upperLayer.strokeEnd = progress / self.windingNumber;
+    
+    
+    for (int i = 0; i < kNumberOfgradientLayers; i++)
+    {
+        CAShapeLayer *gradientLayer = self.gradientLayers[i];
+        
+        CGFloat proportion = (CGFloat)(kNumberOfgradientLayers - i) / kNumberOfgradientLayers;
+        
+        gradientLayer.frame = frame;
+        gradientLayer.lineCap = lineCap;
+        gradientLayer.lineJoin = lineJoin;
+        gradientLayer.lineWidth = lineWidth;
+        gradientLayer.path = scaledPath;
+        gradientLayer.strokeStart = (progress - proportion) / self.windingNumber;
+        gradientLayer.strokeEnd = progress / self.windingNumber;
+    }
     
     CGPathRelease(scaledPath);
 }

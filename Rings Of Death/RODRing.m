@@ -15,11 +15,11 @@
     self = [super init];
     if (self)
     {
-        _tintColor = [UIColor whiteColor];
+        _bodyColor = [UIColor lightGrayColor];
+        _headColor = [UIColor whiteColor];
         _relativeFrame = CGRectMake(0, 0, 1, 1);
         
         _shadowProportion = 0.25;
-        _aboveShadowProportion = 0.5;
     }
     return self;
 }
@@ -137,7 +137,6 @@
     if (self)
     {
         self.shadowProportion = 0.15;
-        self.aboveShadowProportion = 0.3;
     }
     return self;
 }

@@ -12,11 +12,11 @@
 
 - (UIBezierPath *)bezierPathWithWindingNumber:(NSInteger)windingNumber;
 
-@property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong) UIColor *bodyColor;
+@property (nonatomic, strong) UIColor *headColor;
 @property (nonatomic, assign) CGRect relativeFrame;
 
 @property (nonatomic, assign) CGFloat shadowProportion;
-@property (nonatomic, assign) CGFloat aboveShadowProportion;
 
 
 @end
