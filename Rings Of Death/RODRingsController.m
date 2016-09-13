@@ -30,12 +30,12 @@
         _currentIndex = -1;
         _progressByIndex = [NSMutableDictionary dictionary];
         
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Do stuff!" style:UIBarButtonItemStyleDone target:self action:@selector(doStuff)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Go" style:UIBarButtonItemStyleDone target:self action:@selector(go)];
     }
     return self;
 }
 
-- (void)doStuff
+- (void)go
 {
     self.currentIndex = (self.currentIndex + 1) % self.rings.count;
     
