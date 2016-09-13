@@ -62,6 +62,51 @@
 
 @end
 
+@implementation RODStarRing
+
+- (instancetype)initWithOuterRadius:(CGFloat)outerRadius innerRadius:(CGFloat)innerRadius lineWidth:(CGFloat)lineWidth
+{
+    self = [super init];
+    if (self)
+    {
+        _outerRadius = outerRadius;
+        _innerRadius = innerRadius;
+        _lineWidth = lineWidth;
+    }
+    return self;
+}
+
+- (UIBezierPath *)bezierPathWithWindingNumber:(NSInteger)windingNumber
+{
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    
+    [bezierPath moveToPoint:CGPointMake(0.5, 0.5 - self.outerRadius)];
+    
+    for (int i = 0; i < windingNumber; i++)
+    {
+        for (int j = 1; j <= 5; j++)
+        {
+            CGFloat x1 = 0.5 + self.innerRadius * sin((j - 0.5) * 2 * M_PI / 5);
+            CGFloat y1 = 0.5 - self.innerRadius * cos((j - 0.5) * 2 * M_PI / 5);
+            
+            [bezierPath addLineToPoint:CGPointMake(x1, y1)];
+            
+            CGFloat x2 = 0.5 + self.outerRadius * sin(j * 2 * M_PI / 5);
+            CGFloat y2 = 0.5 - self.outerRadius * cos(j * 2 * M_PI / 5);
+            
+            [bezierPath addLineToPoint:CGPointMake(x2, y2)];
+        }
+    }
+    
+    bezierPath.lineWidth = self.lineWidth;
+    bezierPath.lineCapStyle = kCGLineCapRound;
+    bezierPath.lineJoinStyle = kCGLineJoinMiter;
+    
+    return bezierPath;
+}
+
+@end
+
 @implementation RODSkullRing
 
 - (UIBezierPath *)bezierPathWithWindingNumber:(NSInteger)windingNumber
@@ -129,7 +174,7 @@
 
 @end
 
-@implementation RODStarRing
+@implementation RODPentagramRing
 
 - (instancetype)init
 {

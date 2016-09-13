@@ -30,11 +30,21 @@
 
 @end
 
+@interface RODStarRing : RODRing
+
+@property (nonatomic, assign, readonly) CGFloat outerRadius;
+@property (nonatomic, assign, readonly) CGFloat innerRadius;
+@property (nonatomic, assign, readonly) CGFloat lineWidth;
+
+- (instancetype)initWithOuterRadius:(CGFloat)outerRadius innerRadius:(CGFloat)innerRadius lineWidth:(CGFloat)lineWidth;
+
+@end
+
 @interface RODSkullRing : RODRing
 
 @end
 
-@interface RODStarRing : RODRing
+@interface RODPentagramRing : RODRing
 
 @end
 

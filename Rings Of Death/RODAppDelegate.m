@@ -22,17 +22,14 @@
     // Three concentric rings - like the activity view
     
     RODRing *outerRing = [[RODCircleRing alloc] initWithRadius:7.0/16 lineWidth:1.9/16];
-    outerRing.relativeFrame = CGRectMake(0, 0, 1, 1);
     outerRing.bodyColor = [UIColor colorWithRed:0.9 green:0.0 blue:0.0 alpha:1];
     outerRing.headColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.5 alpha:1];
     
-    RODRing *middleRing = [[RODCircleRing alloc] initWithRadius:5.0/12 lineWidth:1.9/12];
-    middleRing.relativeFrame = CGRectMake(0.125, 0.125, 0.75, 0.75);
+    RODRing *middleRing = [[RODCircleRing alloc] initWithRadius:5.0/16 lineWidth:1.9/16];
     middleRing.bodyColor = [UIColor colorWithRed:0.5 green:0.9 blue:0.0 alpha:1];
     middleRing.headColor = [UIColor colorWithRed:0.7 green:1.0 blue:0.0 alpha:1];
     
-    RODRing *innerRing = [[RODCircleRing alloc] initWithRadius:3.0/8 lineWidth:1.95/8];
-    innerRing.relativeFrame = CGRectMake(0.25, 0.25, 0.5, 0.5);
+    RODRing *innerRing = [[RODCircleRing alloc] initWithRadius:3.0/16 lineWidth:1.9/16];
     innerRing.bodyColor = [UIColor colorWithRed:0 green:0.7 blue:0.8 alpha:1];
     innerRing.headColor = [UIColor colorWithRed:0 green:0.9 blue:1.0 alpha:1];
     
@@ -41,6 +38,26 @@
     
     UINavigationController *circlesNavigationController = [[UINavigationController alloc] initWithRootViewController:circlesController];
     [viewControllers addObject:circlesNavigationController];
+    
+    // Three concentric stars
+    
+    RODRing *outerStarRing = [[RODStarRing alloc] initWithOuterRadius:14.0/30 innerRadius:7.0/30 lineWidth:1.8/30];
+    outerStarRing.bodyColor = [UIColor colorWithRed:0.9 green:0.0 blue:0.0 alpha:1];
+    outerStarRing.headColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.0 alpha:1];
+    
+    RODRing *middleStarRing = [[RODStarRing alloc] initWithOuterRadius:10.0/30 innerRadius:5.0/30 lineWidth:1.8/30];
+    middleStarRing.bodyColor = [UIColor colorWithRed:0.9 green:0.4 blue:0.0 alpha:1];
+    middleStarRing.headColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:1];
+    
+    RODRing *innerStarRing = [[RODStarRing alloc] initWithOuterRadius:6.0/30 innerRadius:3.0/30 lineWidth:1.8/30];
+    innerStarRing.bodyColor = [UIColor colorWithRed:0.9 green:0.8 blue:0.0 alpha:1];
+    innerStarRing.headColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1];
+    
+    RODRingsController *starsController = [[RODRingsController alloc] initWithRings:@[ outerStarRing, middleStarRing, innerStarRing ]];
+    starsController.title = @"Stars";
+    
+    UINavigationController *starsNavigationController = [[UINavigationController alloc] initWithRootViewController:starsController];
+    [viewControllers addObject:starsNavigationController];
     
     // a skull and two rings for the eyes
     
@@ -72,7 +89,7 @@
     leftHornsRing.bodyColor = [UIColor colorWithRed:0.8 green:0.8 blue:0 alpha:1];
     leftHornsRing.headColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:1];
     
-    RODRing *starRing = [[RODStarRing alloc] init];
+    RODRing *starRing = [[RODPentagramRing alloc] init];
     starRing.relativeFrame = CGRectMake(0.35, 0.35, 0.3, 0.3);
     starRing.bodyColor = [UIColor colorWithRed:0.6 green:0 blue:0 alpha:1];
     starRing.headColor = [UIColor colorWithRed:0.8 green:0 blue:0 alpha:1];
