@@ -35,6 +35,7 @@
     
     RODRingsController *circlesController = [[RODRingsController alloc] initWithRings:@[ outerRing, middleRing, innerRing ]];
     circlesController.title = @"Circles";
+    circlesController.tabBarItem.image = [UIImage imageNamed:@"rings"];
     
     UINavigationController *circlesNavigationController = [[UINavigationController alloc] initWithRootViewController:circlesController];
     [viewControllers addObject:circlesNavigationController];
@@ -55,6 +56,7 @@
     
     RODRingsController *starsController = [[RODRingsController alloc] initWithRings:@[ outerStarRing, middleStarRing, innerStarRing ]];
     starsController.title = @"Stars";
+    starsController.tabBarItem.image = [UIImage imageNamed:@"stars"];
     
     UINavigationController *starsNavigationController = [[UINavigationController alloc] initWithRootViewController:starsController];
     [viewControllers addObject:starsNavigationController];
@@ -75,6 +77,7 @@
     
     RODRingsController *heartsController = [[RODRingsController alloc] initWithRings:@[ outerHeartRing, middleHeartRing, innerHeartRing ]];
     heartsController.title = @"Hearts";
+    heartsController.tabBarItem.image = [UIImage imageNamed:@"hearts"];
     
     UINavigationController *heartsNavigationController = [[UINavigationController alloc] initWithRootViewController:heartsController];
     [viewControllers addObject:heartsNavigationController];
@@ -98,6 +101,7 @@
     
     RODRingsController *skullController = [[RODRingsController alloc] initWithRings:@[ skullRing, leftEyeRing, rightEyeRing ]];
     skullController.title = @"Skull";
+    skullController.tabBarItem.image = [UIImage imageNamed:@"skull"];
     
     UINavigationController *skullNavigationController = [[UINavigationController alloc] initWithRootViewController:skullController];
     [viewControllers addObject:skullNavigationController];
@@ -121,6 +125,7 @@
     
     RODRingsController *rockAndRollController = [[RODRingsController alloc] initWithRings:@[ leftHornsRing, starRing, rightHornsRing ]];
     rockAndRollController.title = @"Rock & Roll";
+    rockAndRollController.tabBarItem.image = [UIImage imageNamed:@"pentagram"];
     
     UINavigationController *rockAndRollNavigationController = [[UINavigationController alloc] initWithRootViewController:rockAndRollController];
     [viewControllers addObject:rockAndRollNavigationController];
